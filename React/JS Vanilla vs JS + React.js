@@ -79,4 +79,7 @@ const buttonA = <button data-id="123">Button 1</button>
 /*Los proyectos se crean con vite de la siguiente manera:
 npm init -y
 npm create vite@latest
+
+Y se ejecutan con:
+npm run dev
 */
