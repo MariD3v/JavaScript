@@ -14,13 +14,16 @@ Texto sin repeticiones: EnulgardeMch
 */
 
 let texto = prompt("Introduce un texto");
+texto = texto.toUpperCase();
+texto = texto.replace(/ /g, ''); 
+
 document.write("Texto sin repeticiones: ")
 let textSet = new Set(texto);
 for (const chracter of textSet){ 
     document.write(chracter);
 }
 document.write("<br>");
-texto = texto.toUpperCase();
+
 let chracterMap = new Map();
 
 for (let i=0; i< texto.length; i++){

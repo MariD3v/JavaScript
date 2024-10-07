@@ -39,9 +39,10 @@ document.write("Soy un print en navegador!");
     texto1.lastIndexOf(); //Devuelve la última posición donde aparece el carácter/texto
     texto1.startsWith("hola"); //Devuelve true si empieza por el texto indicado o false si no
     texto1.replace("que remplazar", "por qué remplazar"); //Reemplaza en el texto lo que queramos por lo que queramos
-    texto1.trim();
+    texto1.trim(); // Elimina los espacios en blanco al principio y al final de una cadena de texto. No afecta los espacios que están en medio de la cadena
     texto1.substring(inicio, fin); //Devuelve el texto desde la posición que indiquemos hasta la posición que indiquemos.
     texto1.split("separador", "limite"); //Divide el texto en un array eligiendo un separador y pudiendo elegir hasta que parte del texto separar
+    texto1.includes("a"); //Comprueba si el texto incluye lo que queramos
     typeOf(texto1); //Devuelve el tipo de dato
     isNaN(texto1); //Devuelve False si es un número o True si es un número
 
