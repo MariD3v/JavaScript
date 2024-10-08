@@ -24,18 +24,16 @@ for (const chracter of textSet){
 }
 document.write("<br>");
 
-let chracterMap = new Map();
+let chracterMap = new Map([["A", 0],["E", 0],["I", 0],["O", 0],["U", 0]]);
 
 for (let i=0; i< texto.length; i++){
-    chracterMap.set(texto.charAt(i),0);
-}
-
-for (let i=0; i< texto.length; i++){
-    chracterMap.set(texto.charAt(i), (chracterMap.get(texto.charAt(i))+1));
+    if(chracterMap.has(texto[i])){
+        chracterMap.set(texto[i],(chracterMap.get(texto[i])+1));
+    }
 }
 
 for (let[clave,valor] of chracterMap){ 
-    document.write(clave + ": " + valor + "<br>");
+    document.write("<tr><td>"+clave + "</td><td> " + valor + "</td></tr>");
 }
 
 

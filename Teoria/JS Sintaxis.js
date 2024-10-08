@@ -87,18 +87,6 @@ document.write("Soy un print en navegador!");
         console.log ("Ni myBool es true ni myNumber es igual a 6");
     }
 
-//FUNCIONES
-
-    function myFunction(){
-        console.log("Mi funcion está funcionando");
-    }
-    myFunction();
-
-    function myReturnFunction(){
-        return "Mi funcion está funcionando";
-    }
-    console.log(myReturnFunction());
-
 //LISTAS (desordenado y con repetidos)
 
     //En las listas de JS no es necesario definirla previamente, y son heterogéneos (Pueden llevar dentro distintos tipos de datos)
@@ -196,6 +184,24 @@ document.write("Soy un print en navegador!");
         console.log(myCounter);
         myCounter ++;
     }
+
+
+//FUNCIONES
+
+    /*Utilizar funciones de otro .js
+    Debemos en el html, incluir ambos scripts. 
+    De tal manera que podriamos acceder desde uno a las funciones del otro.*/
+
+    function myFunction(){
+        console.log("Mi funcion está funcionando");
+    }
+    myFunction();
+
+    function myReturnFunction(){
+        return "Mi funcion está funcionando";
+    }
+    console.log(myReturnFunction());
+
 
 //CLASES
 
