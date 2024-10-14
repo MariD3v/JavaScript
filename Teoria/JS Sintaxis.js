@@ -192,16 +192,30 @@ document.write("Soy un print en navegador!");
     Debemos en el html, incluir ambos scripts. 
     De tal manera que podriamos acceder desde uno a las funciones del otro.*/
 
-    function myFunction(){
+    function myFunction(...parámetros){ //Para poder meter tantos parámetros como queramos, pero dentro de la función debemos tratar los datos como un array
         console.log("Mi funcion está funcionando");
     }
     myFunction();
 
-    function myReturnFunction(){
+    function myReturnFunction(parámetros){
         return "Mi funcion está funcionando";
     }
     console.log(myReturnFunction());
 
+    //Función anónima
+
+    const myAnonFunction = function(parámetros){
+        console.log(parámetros);
+    }
+
+    myAnonFunction("Parámetro");
+
+    //Función flecha
+    const myArrowFunction1 = () => console.log("No tengo parámetros");
+    const myArrowFunction2 = parámetros => parámetros*3  //Son iguales
+    const myArrowFunction3 = parámetros => {            //Son iguales
+        return parámetros*3
+    }
 
 //CLASES
 
