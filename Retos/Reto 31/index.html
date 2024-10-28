@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="estilos.css" />
+    <script src="script.js"></script>
+</head>
+<body>
+    <h2>Panel de Control</h2>
+    <form action="">
+       <fieldset>
+        <label for="tarea">Tarea:</label>
+        <input type="Text" id="tarea" value="" /><br>
+        <label for="descripcion">Descripción:</label><br>
+        <textarea id="descripcion" cols="64" rows="6"></textarea>
+        <label for="posicion">Posición:</label>
+        <input type="number" min="0" id="posicion" value=""/>
+        <label for="id">ID:</label>
+        <input type="Text" id="id" value=""/><br>
+        <label for="clase">Clase:</label>
+        <input type="Text" id="clase" value=""/><br>
+        <label for="htmlPlace">Lugar de HTML (Por ID):</label>
+        <input type="Text" id="htmlPlace" value=""/><br>
+        <input type="button" id="btnAñadir" value="Añadir" onclick="nuevaTarea()"/>
+        <input type="button" id="btnEliminar" value="Eliminar" onclick="quitaTarea()"/>
+        <input type="button" id="btnReemplazar" value="Reemplazar" onclick="reemplazarTarea()"/>
+        </fieldset><br>
+        <input type="button" id="dom" value="DOM" onclick='obtenerDom()'/>
+        <label for="donde">De (Por ID):</label>
+        <input type="text" id="donde" value=""/>
+    </form>
+    <hr>
+    <h1>Tareas Principales</h1>
+    <main id="principal"></main>
+    <h1>Tareas Importantes</h1>
+    <div id="importante"></div>
+    <h1>Tareas para hoy</h1>
+    <div id="hoy"></div>
+    <h2>DOM</h2>
+    <div id="salidaDom"></div>
+</body>
+</html>
