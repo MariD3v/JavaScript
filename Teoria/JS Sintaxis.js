@@ -249,16 +249,50 @@ document.write("Soy un print en navegador!");
     
 
 //CLASES
-
-    class Person{
-        constructor(name, age){
-            this.name = name;
-            this.age = age;
+    //Objetos literales
+        const person_1 = {
+            nombre : "Mari",
+            color : "Rosa",
+            edad : 24,
+            mujer : true
         }
-    }
+        const person_2 = {
+            nombre : "Miki",
+            color : "Negro",
+            edad : 26,
+            mujer : false
+        }
 
-    let person1 = new Person("Mari", 24);
-    console.log(person1);
+        console.log(person_1.nombre); //Acceder a una propiedad
+        person_1.medida = 1.70; //Añadir una propiedad al objeto
+        person_1.nombre = "Marichuli"; //Modificar campos
+        delete person_1.nombre; //Eliminar una propiedad
+
+    //Forma clásica
+        function Punto(ejex=0, ejey=0){
+            this.x=ejex; //constructor
+            this.y=ejey;
+            
+            this.mostrar=function(){ //método
+                document.write(this.x + ", " + this.y);
+            }
+        }
+
+        let punto1 = new Punto();
+        let punto2 = new Punto(2,3);
+        document.write(punto2.x); //Acceder a propiedades
+        punto1.mostrar(); //Invocar método
+
+    //Forma moderna
+        class Person{
+            constructor(name, age){
+                this.name = name;
+                this.age = age;
+            }
+        }
+
+        let person1 = new Person("Mari", 24);
+        console.log(person1);
 
 //BOM (Browser Objects Model)
     
@@ -368,3 +402,62 @@ document.write("Soy un print en navegador!");
     nuevoElemento.appendChild(p1); //Añadir hijo al final
     let p2 = document.getElementsByTagName("p");
     nuevoElemento.removeChild(p2); //Elimina p
+
+//CSS
+
+    let parrafo1=document.getElementsByTagName("p")[0]; //selecciona un elemento párrafo
+    parrafo1.style.color="red";
+    parrafo1.style.border="1px solid black";
+    parrafo1.style.backgroundColor="white"; //Las propiedades con "-" deben ser reemplazadas. Por ejemplo: background-color a backgroundColor, text-align a textAlign...
+    parrafo1.style["background-color"]="white"; //Otra forma de poner las propiedades con "-"
+
+    let cssParrafo1=window.getComputedStyle(parrafo1); //Obtener las propiedades de parrafo1 pero no pueden ser editadas
+    console.log(cssParrafo1.fontFamily);
+    parrafo1.className="nuevaClase"; //asignamos a párrafo1 una nueva clase.
+    console.log(parrafo1.className); // mostramos el valor del atributo class de párrafo 
+    for(let clase of parrafo1.classList){ //Por si el parrafo1 tuviera mas de 1 clase, se utiliza .classList para sacar todas sus clases
+        console.log(clase);
+        }
+    parrafo1.add("nuevaclase", [,"nuevaclase2"]); //Añadir varias clases
+    parrafo1.remove("claseAEliminar", [,"claseAEliminar2"]); //Eliminar varias clases
+    parrafo1.toggle("nuevaclase",true); //Si solo se le pasa 1 parámetro (la clase), si no tiene una clase, se le asigna y si ya la tiene, no se le asigna. Con el segundo parámetro, si es true, fuerza a añadir la clase, si es false, quita la clase
+    parrafo1.contains("clase"); //Indica si un elemento tiene una clase o no
+    parrafo1.replace("claseantigua", "clasenueva")
+
+    //Atributos data: Se usan para almacenar cosas en elemento que usaremos con JS
+    parrafo1.dataset.nombreNuevaData = "valor data"; //Agregar un data
+
+//TEMPORIZADORES
+
+    var funcionPorTiempo = setTimeout(()=>alert("hola"), 5000); //Es una funcion que ejecuta una función al transcurrir el tiempo indicado
+    clearTimeout(funcionPorTiempo); //Cancela el temporizador del setTimeout
+
+    var funcionCadaCiertoTiempo = setInterval(()=>alert("hola"), 5000); //Es una funcion se ejecuta cada 5 segundos
+    var cont=0;
+    var funcionCadaCiertoTiempoParada = setInterval(function(){
+        alert("hola");
+        cont ++;
+        if (cont>=10){clearInterval(funcionCadaCiertoTiempoParada)} //clearInterval cancela el temporizador setInterval
+    }, 5000);
+
+//COOKIES
+
+    let cookie1 = document.cookie="usuario=Mari"; //Guardar una cookie con un usuario
+    console.log(cookie1); //Leer el contenido de las cookies
+
+    let arrayCookie = cookie1.split(";"); //Obtener las cookies en un array (clave=valor)
+    for(let cookie of arrayCookie){
+        let [clave,valor]=cookie.split("="); //Obtener clave y valor de cada cookie
+        console.log(`La cookie "${clave}" tiene el valor "${valor}" `);
+    }
+
+    //Para que las cookies no se destruyan al cerrar el navegador debemos ponerles una fecha de expiración:
+    let hoy=new Date(); //Crea un objeto de tipo fecha con la fecha actual
+    let caducidadMs=hoy.getTime() + 1000 * 60 * 60 * 24 * 7; //crea una variable tomando los milisegundos de hoy y sumando los milisegundos de la semana que viene
+    let caducidad=new Date(caducidadMs); //Convierte los milisegundos a un objeto Date que representa la fecha de dentro de una semana
+    let cookie2 = document.cookie = `usuario=Mari;expires=${caducidad.toUTCString()} `; //Se coloca la fecha de expiración en formato UTC, la cookie "usuario" caducará dentro de una semana
+
+    let cookie3 =Document.cookie="usuario=Mari;expires=Sat, 01 Jan 2000 00:00:01 GMT"; //Borramos una cookie, poniendole una fecha de expiración en el pasado
+    let cookie4 =document.cookie="usuario=Mari;path=/"; //Ruta de cookies desde donde se puede acceder a ellas
+    let cookie5 = document.cookie="usuario=Mari;path=/;domain=mariBookstore.net"; //Ruta de cookies desde donde se puede acceder a ellas, pero solo desde mariBookstore.net y sus subdominios
+    
