@@ -20,6 +20,7 @@ document.write("Soy un print en navegador!");
 
     let myBool = true;
     let myNumber = 6.5;
+    let myRandomNumber = Math.floor(Math.random() * 50) + 1; // 1- 50
     let myString = "String";
     let myVoidVariable = null; //Variable aun no definida
     let myInfinityVariable = 1/0; // Variable infinita, no da ERROR
@@ -132,6 +133,7 @@ document.write("Soy un print en navegador!");
     myList.includes(10); //Comprueba si el argumento se encuentra en el array (True/False)
     myList.reverse(); //Da la vuelta al array
     myList.sort(); //Ordena el array
+    myList.sort((a,b) => a.localeCompare(b)); //Ordena de a-z
     let newModifiedArray = myList.map(x=>x+1); //Crea un array, modificando cada elemento del array (x) (en este caso +1)
     let newFilterArray = myList.filter(x=>x>1); //Crea un array, filtrando cada elemento del array (x) (en este caso, obtendrá los elementos >1)
     const mySetDup = new Set(...myList); //Convierte la lista en set
@@ -211,6 +213,11 @@ document.write("Soy un print en navegador!");
     /*Utilizar funciones de otro .js
     Debemos en el html, incluir ambos scripts. 
     De tal manera que podriamos acceder desde uno a las funciones del otro.*/
+
+    function myPredeFunction(x=1,y=2){ //Poner valores por defecto
+        console.log(x + y);
+    }
+    myFunction();
 
     function myFunction(...parámetros){ //Para poder meter tantos parámetros como queramos, pero dentro de la función debemos tratar los datos como un array
         console.log("Mi funcion está funcionando");
