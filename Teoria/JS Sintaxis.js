@@ -292,14 +292,82 @@ document.write("Soy un print en navegador!");
 
     //Forma moderna
         class Person{
-            constructor(name, age){
-                this.name = name;
-                this.age = age;
+            constructor(nombre,apellidos){
+                this.nombre = nombre;
+                this.apellidos = apellidos;
+                this.tipo = "";
+            }
+
+            mostrar(){
+                document.write("Nombre:"+this.nombre);
+            }
+
+            get nombre(){ //getter
+                return this.nombre;
+            }
+        
+            set nombre(n){ //setter
+                n = prompt("Introduce Nombre");
+                this.nombre = n;
+            }
+
+            get nombreCompleto(){ //Forma de hacer un nuevo atributo con get y set
+                return this.nombre + " " + this.apellidos;
+            }
+            
+            set edad(años){
+                this.tipo="Adulto";
+                if (años<18){
+                    this.tipo="Adolescente";
+                }
             }
         }
 
         let person1 = new Person("Mari", 24);
-        console.log(person1);
+        document.write(person1);
+        person1.nombre; //Uso del getter como si fuera una propiedad
+        person1.nombreCompleto; 
+        person1.nombre="Maria"; //Uso del setter como si fuera una propiedad
+        document.write(person1.mostrar());
+
+    //Herencia
+        class Hijo extends Person{ 
+            constructor(){
+                super(); //Hereda todos los atributos y métodos del padre
+            }
+
+            setName(){ //Metodo solo del hijo
+                this.name = prompt("Inserta nombre");
+            }
+        }
+
+        class Nieto extends Person{
+            constructor(name,age,weigth = 2){ //Por defecto 2k
+                super(name,age);
+                this.weigth = weigth; //Pasarle aparte otros atributos
+            }
+            mostrar(){ //Si llamamos a una funcion de la misma manera que la padre, estamo sobreescribiendo la función
+                super.mostrar();  
+                document.write(", Peso:"+this.weigth);
+            }
+        }
+
+    //Static (clases con funciones privadas)
+
+        class Vector{
+            constructor(x,y){
+                this.x=x;
+                this.y=y;
+            }
+            static sumaVector(vector1,vector2){
+                let x1= vector1.x+vector2.x;
+                let y1= vector1.y+vector2.y;
+                document.write(x1+", "+y1);
+            }
+        }
+        let v1 = new Vector(3,4);
+        let v2 = new Vector(1,2);
+        Vector.sumaVector(v1,v2); //Para usar un metodo static se debe llamar a la clase y pasar por parámetros el objeto;
 
 //BOM (Browser Objects Model)
     
