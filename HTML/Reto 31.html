@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reto 31</title>
+    <style>
+        form *{
+            margin: 5px;
+            display: block;
+        }
+
+        input[type="button"]{
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+    <h2>Panel de Control</h2>
+    <form action="">
+       <fieldset>
+            <label for="tarea">Tarea:</label>
+            <input type="Text" id="tarea" value="" />
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" cols="64" rows="6"></textarea>
+            <label for="posicion">Posición:</label>
+            <input type="number" min="0" id="posicion" value=""/>
+            <label for="id">ID:</label>
+            <input type="Text" id="id" value=""/>
+            <label for="clase">Clase:</label>
+            <input type="Text" id="clase" value=""/>
+            <label for="htmlPlace">Lugar de HTML (Por ID):</label>
+            <input type="Text" id="htmlPlace" value=""/>
+            <input type="button" id="btnAñadir" value="Añadir" onclick="nuevaTarea()"/>
+            <input type="button" id="btnEliminar" value="Eliminar" onclick="quitaTarea()"/>
+            <input type="button" id="btnReemplazar" value="Reemplazar" onclick="reemplazarTarea()"/>
+            <label for="usuario">Usuario:</label>
+            <input type="Text" id="usuario" value=""/>
+            <input type="button" id="loginbutton" value="Iniciar sesión" onclick="logIn()"/>
+            <input type="button" id="otroHtml" value="Abrir HTML" onclick="openHtml()">
+            <input type="button" id="otroHtml" value="Cerrar HTML" onclick="closeHtml()">
+        </fieldset>
+        <input type="button" id="dom" value="DOM" onclick='obtenerDom()'/>
+        <input type="button" id="bgcolor" value="Fondo" onclick="bgcambiarColor()"/>
+        <label for="donde">De (Por ID):</label>
+        <input type="text" id="donde" value=""/>
+    </form>
+    <hr>
+    <h1>Tareas Principales</h1> 
+    <input type="button" id="tareacolor" value="Colorear tareas" onclick="changeColorT()"/>
+    <main id="principal"></main>
+    <h1>Tareas Importantes</h1>
+    <div id="importante"></div>
+    <h1>Tareas para hoy</h1>
+    <div id="hoy"></div>
+    <h2>DOM</h2>
+    <div id="salidaDom"></div>
+    <script src="../Reto 31.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Reto 28</title>
+        <style>
+
+            h1{
+                padding-top: 50px;
+            }
+            
+            section{
+                text-align: center;
+                font-size: 30px;
+                background-color: rgb(225, 199, 250);
+                width: 50%;
+                height: 50%;
+                margin: 0 25%;
+            }
+
+            textarea{
+                padding: 20px 0;
+                resize: none;
+                text-align: center;
+                font-size: 50px;
+                width: 90%;
+                margin: 10px 5%;
+            }
+        </style>
+    </head>
+    <body>
+        <section>
+            <h1>Calculadora</h1>
+            <input type="number" class="num" value=""/>
+            <input type="number" class="num" value=""/><br>
+            <div>
+                <input type="button" id="sumabton" value="+" onclick="javascript:calc(suma)"/>
+                <input type="button" id="restabton" value="-" onclick="javascript:calc(resta)"/>
+                <input type="button" id="multibton" value="*" onclick="javascript:calc(multi)"/>
+                <input type="button" id="divibton" value="/" onclick="javascript:calc(divi)"/>
+            </div><br>
+            <textarea id="resultado" value="" rows="1" cols="60" readonly></textarea>
+        </section>
+        <script src="../Reto 28.js"></script>
+    </body>
+</html>
