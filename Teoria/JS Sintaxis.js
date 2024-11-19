@@ -369,7 +369,52 @@ document.write("Soy un print en navegador!");
         let v2 = new Vector(1,2);
         Vector.sumaVector(v1,v2); //Para usar un metodo static se debe llamar a la clase y pasar por parámetros el objeto;
 
-//BOM (Browser Objects Model)
+//Expresiones regulares
+
+    let newERStart = /^c/ // ^ significa que debe empezar por ello
+    let newERFinish = /c$/ // $ significa que debe terminar por ello
+    let newERCualquiera = /a.e/ // . significa que puede ser cualquier carácter  entre la a y e
+    let newEROpcional = /[ao]/ // [] significa que debe ser "a" o "o"
+    let newERRango = /[A-Z]/ // - determina un rango de A a Z sin acentos y en mayúsculas
+    let newERRangoAcentos = /[a-záéíóúÜ]/ // - determina un rango de A a Z con acentos en minúsculas
+    let newERNo = /[^A-Z]/ //Cuando ^ está dentro de los [] significa negación. Es decir, que no esté entre la A-Z
+    let newERRep = /[AEIOU].+a/ // + significa que . puede aparecer 1 o más veces
+    let newERRep2 = /[AEIOU].*a/ // * significa que . puede aparecer 0 o más veces
+    let newERNoRep = /[AEIOU].?a/ // ? significa que . puede aparecer 0 o 1 veces
+    let newERNCaracteres = /[0-9][AEIOU]{5}/ // {} establece el numero de caracteres que debe ser lo anterior, solo afecta a las vocales
+    let newERNCaracteres2 = /([AEIOU]{1,2}[0-9]){3}/ //1 o 2 vocales y 1 numero, pero x3. Ej: AE3IU4EO3
+    let newEROpcional2 = /[a-z]|[0-9]/ // | indica o es de a-z o es un numero
+    let newERMayus = /c/i //No distingue entre mayus y minus
+    let newERDevolverMuchos = /c/g //No devuelve solo 1 resultado, devuelve todos los resultados.
+
+    /* SIMBOLOS:
+        \d cualquier numero
+        \D cualquier caracter menos los numeros
+        \s espacio en blanco
+        \S cualquier caracter menos espacio en blanco
+        \w lo mismo que [a-zA-Z0-9]
+        \W lo mismo que [^a-zA-Z0-9]
+        \0 caracter nulo
+        \n nueva linea
+        \t tabulador
+        \\ el simbolo \
+        \" comillas dobles
+        V comillas simples
+        \c para caracteres como []/\...
+    */
+
+    let newERCodigoPostal =/^((5[012])|([0-4][0-9]))([0-9]{3})$/ // Ej: codigo postal, es decir de 00000 a 52999
+
+    let newER = /[KLXYZ0-9][0-9]{7}[A-Z]/g
+    let newER2 = new RegExp("[KLXYZ0-9][0-9]{7}[A-Z]","g"); //Es lo mismo de arriba
+    let texto = "Hola mi NIF es A3452341X"
+
+    document.write(newER.test(texto)); //Comprueba si en el texto se encuentra esa expresion regular. Si la encuentra devuelve true, si no false.
+    let resultado = newER.exec(texto); //Comprueba si en el texto se encuentra esa expresion regular y devuelve el contenido.
+    document.write(resultado[0]); // Devuelve el resultado
+    document.write(resultado[1]); // Devuelve la posición del resultado en el texto
+
+    //BOM (Browser Objects Model)
     
     //window
     let desplazamientoHorizontal = window.scrollX;
