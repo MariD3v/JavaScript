@@ -352,6 +352,41 @@ document.write("Soy un print en navegador!");
             }
         }
 
+    //Herencia clásica
+
+    function Vehiculo(marca="",modelo="",color="",fabricacion=0,cilindrada=0){
+        this.marca = marca;
+        this.modelo = modelo;
+        this.color = color;
+        this.fabricacion = fabricacion;
+        this.cilindrada = cilindrada;
+    
+        this.mostrarDatos = function(){
+            document.write(this.marca+', '+this.modelo+', '+this.color+', '+this.fabricacion+', '+this.cilindrada);
+        }
+    }
+    
+    function Furgoneta(marca,modelo,color,fabricacion,cilindrada,pasajeros=0){
+        this.pasajeros=pasajeros;
+        Vehiculo.call(this,marca,modelo,color,fabricacion,cilindrada);
+    
+        this.mostrarDatos = function(){
+            super.mostrarDatos();
+            document.write(', '+this.pasajeros);
+        }
+    }
+    
+    Furgoneta.prototype = new Vehiculo(); //Así decimos que hereda de Vehículo
+    Furgoneta.prototype.constructor = Furgoneta; //Heredamos el constructor
+    Furgoneta.prototype.asientos = 0; //Añadir una propiedad
+    Furgoneta.prototype.mostrarAsientos = function() {document.write(this.asientos);}; //Añadir un metodo
+
+    let furgo1 = new Furgoneta("Seat", "XR2", "blanco", 2010, 1500, 5);
+    furgo1.asientos=1;
+    furgo1.mostrarDatos();
+    let vehiculo1 = new Vehiculo("Seat", "XR2", "blanco", 2010, 1500);
+    vehiculo1.mostrarDatos();
+
     //Static (clases con funciones privadas)
 
         class Vector{
