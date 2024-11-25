@@ -6,6 +6,23 @@
     <title>Reto 46</title>
 </head>
 <body>
+    <form>
+        <label for="dni">DNI:</label><br>
+        <input required type="text" value="" name="dni" pattern="^[0-9]{8}[A-Za-z]{1}$"/><br>
+        <label for="name">Nombre:</label><br>
+        <input required type="text" value="" name="name" pattern="^[A-Za-z]+|([A-Za-z]+\s[A-Za-z]+)$"/><br>
+        <label for="surname">Apellidos:</label><br>
+        <input required type="text" value="" name="surname" pattern="^[A-Za-z]+|([A-Za-z]+\s[A-Za-z]+)$"/><br>
+        <label for="nac">Fecha de Nacimiento:</label><br>
+        <input required type="date" value="" name="nac"/><br>
+        <label for="email">Email:</label><br>
+        <input required type="email" value="" name="email" pattern="^[a-zA-Z]+@[a-zA-Z]+.[a-zA-Z]+$"/><br>
+        <label for="web">Web:</label><br>
+        <input required type="url" value="" name="web" pattern="^http://www.[a-zA-Z]+.[a-zA-Z]+$"/><br>
+        <label for="pass">Contraseña:</label><br>
+        <input required type="password" value="" name="pass" pattern="^.{8,10}$"/><br>
+        <input type="submit"/>
+    </form>
     <script src="../Reto 46.js"></script>
 </body>
 </html>
