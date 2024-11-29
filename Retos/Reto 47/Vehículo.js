@@ -13,10 +13,10 @@ function Vehiculo(marca="",modelo="",color="",fabricacion=0){
     }
 
     this.parar = function(){
-
+        document.write("El coche " + this.marca + ", " + this.modelo + ", " + this.color + " ha parado");
     }
 
-    this.mostrarDatos = function(){
+    Vehiculo.prototype.mostrarDatos = function(){ //Para poder sobreescribir la funcion en sus clases hijas
         document.write(this.marca+', '+this.modelo+', '+this.color+', '+this.fabricacion+', '+this.cilindrada);
     }
 }
@@ -28,8 +28,8 @@ function Furgoneta(marca,modelo,color,fabricacion,pasajeros=0){
     Vehiculo.call(this,marca,modelo,color,fabricacion);
 
     this.mostrarDatos = function(){
-        Vehiculo.call(mostrarDatos());
-        document.write(', '+this.pasajeros);
+        Vehiculo.prototype.mostrarDatos.call(this);
+        document.write(', '+this.pasajeros+', '+this.asientos);
     }
 }
 
@@ -43,7 +43,7 @@ function Todoterreno(marca,modelo,color,fabricacion,traccion=""){
     Vehiculo.call(this,marca,modelo,color,fabricacion);
     
     this.mostrarDatos = function(){
-        Vehiculo.call(mostrarDatos());
+        Vehiculo.prototype.mostrarDatos.call(this);
         document.write(', '+this.traccion+', '+this.asientos);
     }
 }
@@ -52,10 +52,12 @@ Todoterreno.prototype = new Vehiculo(); //Así decimos que hereda de Vehículo
 Todoterreno.prototype.constructor = Todoterreno; //Heredamos el constructor
 Todoterreno.prototype.asientos = 0; //Añadir una propiedad
 
+let vehiculo1 = new Vehiculo("Kia", "XR2", "blanco", 2010);
+vehiculo1.mostrarDatos();
+document.write("<br>");
 let furgo1 = new Furgoneta("Seat", "XR2", "blanco", 2010, 5);
 furgo1.asientos=1;
 furgo1.mostrarDatos();
-let vehiculo1 = new Vehiculo("Seat", "XR2", "blanco", 2010);
-vehiculo1.mostrarDatos();
-let todoterreno1 = new Todoterreno("Seat", "XR2", "blanco", 2010,"4x4");
+document.write("<br>");
+let todoterreno1 = new Todoterreno("Lambo", "XR2", "blanco", 2010,"4x4");
 todoterreno1.mostrarDatos();

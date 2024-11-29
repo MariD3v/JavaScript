@@ -353,39 +353,41 @@ document.write("Soy un print en navegador!");
         }
 
     //Herencia clásica
+        function Vehiculo(marca="",modelo="",color="",fabricacion=0){
+            this.marca = marca;
+            this.modelo = modelo;
+            this.color = color;
+            this.fabricacion = fabricacion;
+        
+            this.acelerar = function(){
+                document.write(this.marca+' ha acelerado');
+            }
 
-    function Vehiculo(marca="",modelo="",color="",fabricacion=0,cilindrada=0){
-        this.marca = marca;
-        this.modelo = modelo;
-        this.color = color;
-        this.fabricacion = fabricacion;
-        this.cilindrada = cilindrada;
-    
-        this.mostrarDatos = function(){
-            document.write(this.marca+', '+this.modelo+', '+this.color+', '+this.fabricacion+', '+this.cilindrada);
+            Vehiculo.prototype.mostrarDatos = function(){ //Para poder sobreescribir la funcion en sus clases hijas
+                document.write(this.marca+', '+this.modelo+', '+this.color+', '+this.fabricacion+', '+this.cilindrada);
+            }
         }
-    }
-    
-    function Furgoneta(marca,modelo,color,fabricacion,cilindrada,pasajeros=0){
-        this.pasajeros=pasajeros;
-        Vehiculo.call(this,marca,modelo,color,fabricacion,cilindrada);
-    
-        this.mostrarDatos = function(){
-            super.mostrarDatos();
-            document.write(', '+this.pasajeros);
+        
+        function Furgoneta(marca,modelo,color,fabricacion,pasajeros=0){
+            this.pasajeros=pasajeros;
+            Vehiculo.call(this,marca,modelo,color,fabricacion);
+        
+            this.mostrarDatos = function(){
+                Vehiculo.prototype.mostrarDatos.call(this); //LLamar al metodo que se va a sobreescribir
+                document.write(', '+this.pasajeros+', '+this.asientos);
+            }
         }
-    }
-    
-    Furgoneta.prototype = new Vehiculo(); //Así decimos que hereda de Vehículo
-    Furgoneta.prototype.constructor = Furgoneta; //Heredamos el constructor
-    Furgoneta.prototype.asientos = 0; //Añadir una propiedad
-    Furgoneta.prototype.mostrarAsientos = function() {document.write(this.asientos);}; //Añadir un metodo
+        
+        Furgoneta.prototype = new Vehiculo(); //Así decimos que hereda de Vehículo
+        Furgoneta.prototype.constructor = Furgoneta; //Heredamos el constructor
+        Furgoneta.prototype.asientos = 0; //Añadir una propiedad
+        Furgoneta.prototype.mostrarAsientos = function() {document.write(this.asientos);}; //Añadir un metodo
 
-    let furgo1 = new Furgoneta("Seat", "XR2", "blanco", 2010, 1500, 5);
-    furgo1.asientos=1;
-    furgo1.mostrarDatos();
-    let vehiculo1 = new Vehiculo("Seat", "XR2", "blanco", 2010, 1500);
-    vehiculo1.mostrarDatos();
+        let furgo1 = new Furgoneta("Seat", "XR2", "blanco", 2010, 1500, 5);
+        furgo1.asientos=1;
+        furgo1.mostrarDatos();
+        let vehiculo1 = new Vehiculo("Seat", "XR2", "blanco", 2010, 1500);
+        vehiculo1.mostrarDatos();
 
     //Static (clases con funciones privadas)
 
@@ -616,3 +618,23 @@ document.write("Soy un print en navegador!");
     let cookie4 =document.cookie="usuario=Mari;path=/"; //Ruta de cookies desde donde se puede acceder a ellas
     let cookie5 = document.cookie="usuario=Mari;path=/;domain=mariBookstore.net"; //Ruta de cookies desde donde se puede acceder a ellas, pero solo desde mariBookstore.net y sus subdominios
     
+//EVENTOS
+
+function alerta(){
+    alert("Has hecho click");
+}
+windows.onload = function(){  //Cuando se cargen todos los elementos del DOM, entonces ejecuta la funcion
+    document.addEventListener("click", alerta) //con document, seria al hacer el click en todo el documento
+}
+
+let titulo = getElementById("titulo");
+windows.onload = function(){ 
+    titulo.addEventListener("mouseover", alerta) //con titulo, seria pasar por encima solo del titulo
+}
+
+let parrafoVacio = getElementById("parrafoVacio");
+windows.onload = function(){ 
+    document.addEventListener("mouseover", function(event){ //Conforme nos movemos por la pantalla, aparecen las coordenada en el parrafo vacio
+        parrafoVacio.textContent = `Coordenada: (${event.clientX},${event.clientY})`; //Para poder obtener las coordenadas, usamos el objeto "event"
+    }) 
+}
