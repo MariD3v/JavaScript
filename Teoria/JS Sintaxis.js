@@ -623,17 +623,17 @@ document.write("Soy un print en navegador!");
 function alerta(){
     alert("Has hecho click");
 }
-windows.onload = function(){  //Cuando se cargen todos los elementos del DOM, entonces ejecuta la funcion
+window.onload = function(){  //Cuando se cargen todos los elementos del DOM, entonces ejecuta la funcion
     document.addEventListener("click", alerta) //con document, seria al hacer el click en todo el documento
 }
 
-let titulo = getElementById("titulo");
-windows.onload = function(){ 
+let titulo = document.getElementById("titulo");
+window.onload = function(){ 
     titulo.addEventListener("mouseover", alerta) //con titulo, seria pasar por encima solo del titulo
 }
 
-let parrafoVacio = getElementById("parrafoVacio");
-windows.onload = function(){ 
+let parrafoVacio = document.getElementById("parrafoVacio");
+window.onload = function(){ 
     document.addEventListener("mouseover", function(event){ //Conforme nos movemos por la pantalla, aparecen las coordenada en el parrafo vacio
         parrafoVacio.textContent = `Coordenada: (${event.clientX},${event.clientY})`; //Para poder obtener las coordenadas, usamos el objeto "event"
     }) 
