@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reto 52</title>
+</head>
+<body>
+    <h1 style="text-align: center; background-color: rgb(184, 121, 59);color: white;">Informe de incidencia</h1>
+    <div style="padding: 150px; display:flex; flex-direction: row; justify-content:center;">
+        <img id="img" style="height: 400px; width: 400px;" src="https://aelis.es/wp-content/uploads/2023/10/distribucion-internacional-sage-x3.jpg">
+        <form id="formulario" style="padding: 40px; width: 300px; padding-top: 0; justify-content: center; display: flex; flex-direction: column; gap: 10px;">
+            <label for="menu">Tipo de incidencia</label>
+            <select id="menu" name="menu">
+                <option value="distribucion" selected="selected">Distribución</option>
+                <option value="oficina">Oficina</option>
+                <option value="produccion">Producción</option>
+            </select>
+            <label for="numeroSerie">Número de serie</label>
+            <input name="numeroSerie" id="numeroSerie" type="text"/>
+            <p id="error" style="color: red;"></p>
+            <input id="mostrar" type="button" value="Mostrar descripción"/>
+            <textarea id="textarea" style="display: none; height: 200px; width: 180px;"></textarea>
+            <input id="enviar" type="submit">
+        </form>
+    </div>
+    <script src="../Reto 52.js"></script>
+</body>
+</html>
