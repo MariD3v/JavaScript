@@ -614,7 +614,7 @@ document.write("Soy un print en navegador!");
     let caducidad=new Date(caducidadMs); //Convierte los milisegundos a un objeto Date que representa la fecha de dentro de una semana
     let cookie2 = document.cookie = `usuario=Mari;expires=${caducidad.toUTCString()} `; //Se coloca la fecha de expiración en formato UTC, la cookie "usuario" caducará dentro de una semana
 
-    let cookie3 =Document.cookie="usuario=Mari;expires=Sat, 01 Jan 2000 00:00:01 GMT"; //Borramos una cookie, poniendole una fecha de expiración en el pasado
+    let cookie3 =document.cookie="usuario=Mari;expires=Sat, 01 Jan 2000 00:00:01 GMT"; //Borramos una cookie, poniendole una fecha de expiración en el pasado
     let cookie4 =document.cookie="usuario=Mari;path=/"; //Ruta de cookies desde donde se puede acceder a ellas
     let cookie5 = document.cookie="usuario=Mari;path=/;domain=mariBookstore.net"; //Ruta de cookies desde donde se puede acceder a ellas, pero solo desde mariBookstore.net y sus subdominios
     
@@ -638,3 +638,17 @@ window.onload = function(){
         parrafoVacio.textContent = `Coordenada: (${event.clientX},${event.clientY})`; //Para poder obtener las coordenadas, usamos el objeto "event"
     }) 
 }
+
+//JSON
+
+const musico1={
+    nombre:"Bob",
+    apellido:"Dylan",
+    fecha_nacimiento: {dia:24,mes:5,año:1941},
+    discos:['Highway 61 Revisited’,’Blonde on Blonde','Self Portrait']
+}
+
+console.log(JSON.stringify(musico1)); //Convierte un objeto en un JSON
+
+const jsonString = '{"nombre": "Juan", "edad": 30}';
+console.log(JSON.parse(jsonString)); //Convierte un JSON en objeto

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="contenedor" id="contenedor">
+        <div>
+            <h1>{Nombre del Aceite}</h1>
+            <img src="aceite.jpg">
+            <h3>{Capacidad}L {PVP}€</h3>
+            <h4>Ref:{Referencia}</h4>
+        </div>
+        <div>
+            <h1>Picual</h1>
+            <img src="aceite.jpg">
+            <h3>2L 16€</h3>
+            <h4>Ref:A256RW</h4>
+        </div>
+    </div>
+    <hr>
+
+   <h1>Formulario para insertar Aceites</h1> 
+   <label for="nombre">Nombre del aceite</label>
+   <select name="nombre" required>
+        <option value="picual">Picual</option>
+        <option value="arbequina">Arbequina</option>
+        <option value="hojiblanca">Hojiblanca</option>
+        <option value="cornicabra">Cornicabra</option>
+        <option value="royal">Royal</option>
+        <option value="manzanilla">Manzanilla</option>
+        <option value="gordal">Gordal</option>
+    </select>
+    <label for="capacidad">Capacidad</label>
+    <input type="number" name="capacidad" min="1" max="5" required/>
+    <label for="precio">Precio</label>
+    <input type="text" name="precio"/>
+    <label for="referencia">Referencia</label>
+    <input type="text" name="referencia" required/>
+    <input type="button" name="insertar" value="insertar" onclick="nuevoAceite()"/>
+    <input type="submit" name="enviar" value="enviar"/>
+
+   <script src="../Reto 53/Reto 53.js"></script>
+   <script src="../Reto 53/Aceite.js"></script>
+</body>
+</html>
