@@ -5,27 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../Reto 53/style.css">
 </head>
 <body>
     <div class="contenedor" id="contenedor">
-        <div>
-            <h1>{Nombre del Aceite}</h1>
-            <img src="aceite.jpg">
-            <h3>{Capacidad}L {PVP}€</h3>
-            <h4>Ref:{Referencia}</h4>
-        </div>
-        <div>
-            <h1>Picual</h1>
-            <img src="aceite.jpg">
-            <h3>2L 16€</h3>
-            <h4>Ref:A256RW</h4>
-        </div>
     </div>
     <hr>
 
-   <h1>Formulario para insertar Aceites</h1> 
-   <label for="nombre">Nombre del aceite</label>
+   <h1>Formulario para insertar Aceites/Vinos</h1> 
+   <label>Tipo</label>
+   <select name="tipo" required>
+        <option value="aceite">Aceite</option>
+        <option value="vino">Vino</option>
+   </select>
+   <label for="nombre">Nombre</label>
    <select name="nombre" required>
         <option value="picual">Picual</option>
         <option value="arbequina">Arbequina</option>
@@ -41,8 +34,12 @@
     <input type="text" name="precio"/>
     <label for="referencia">Referencia</label>
     <input type="text" name="referencia" required/>
-    <input type="button" name="insertar" value="insertar" onclick="nuevoAceite()"/>
+    <input type="button" value="insertar" onclick="nuevo()"/>
     <input type="submit" name="enviar" value="enviar"/>
+
+    <input type="button" value="Devolver JSON" onclick="json()"/>
+    <input type="text" placeholder="introduce un json" name="jsontext"/>
+    <input type="button" value="Insertar JSON" onclick="insertarJson()"/>
 
    <script src="../Reto 53/Reto 53.js"></script>
    <script src="../Reto 53/Aceite.js"></script>
