@@ -40,25 +40,34 @@ let nombre = document.getElementsByName("nombre")[0];
 let capacidad = document.getElementsByName("capacidad")[0];
 let precio = document.getElementsByName("precio")[0];
 let referencia = document.getElementsByName("referencia")[0];
+let vacio = document.getElementsByName("vacio")[0];
+let uvaslabel = document.getElementById("label");
+let uvas = document.getElementsByName("uvas")[0];
 let jsontext = document.getElementsByName("jsontext")[0];
 
 let enviar =document.getElementsByName("enviar")[0];
 
-contenedor.innerHTML = "";
-
 let aceites = new Array();
 
 function nuevo(){
+    let uvasvalue = uvas.value;
+    console.log(uvasvalue)
     let div = document.createElement("div");
+    let arrayuvas = uvasvalue.split(",");
     if(tipo.value == "aceite"){
         div.innerHTML='<h1>'+tipo.value+'</h1><h1>'+nombre.value+'</h1><img src="../Reto 53/aceite.jpg"><h3>'+capacidad.value+'L '+precio.value+'€</h3><h4>Ref:'+referencia.value+'</h4>';
         contenedor.appendChild(div);
         let aceite = new Aceite(nombre.value, precio.value, capacidad.value,referencia.value);
         aceites.push(aceite)
     } else if (tipo.value == "vino"){
-        div.innerHTML='<h1>'+tipo.value+'</h1><h1>'+nombre.value+'</h1><img src="../Reto 53/vino.jpg"><h3>'+capacidad.value+'L '+precio.value+'€</h3><h4>Ref:'+referencia.value+'</h4>';
+        let uvascontainer = "";
+        for(const value of arrayuvas){
+            uvascontainer += value+" ";
+            console.log(value);
+        }
+        div.innerHTML='<h1>'+tipo.value+'</h1><h1>'+nombre.value+'</h1><img src="../Reto 53/vino.jpg"><h3>'+capacidad.value+'L '+precio.value+'€</h3><h4>Ref:'+referencia.value+'</h4><p>Uvas:'+uvascontainer+'</p>';
         contenedor.appendChild(div);
-        let vino = new Vino(nombre.value, precio.value, capacidad.value,referencia.value,["tempranillo"]);
+        let vino = new Vino(nombre.value, precio.value, capacidad.value,referencia.value,arrayuvas);
         aceites.push(vino)
     }
 }
@@ -71,8 +80,10 @@ function json(){
 
 function insertarJson(){
     jsonviceite = jsontext.value;
-    let div = document.createElement("div");
+    console.log(jsonviceite)
     let jsonobject = JSON.parse(jsonviceite);
+    let div = document.createElement("div");
+
     if(jsonobject.uvas == undefined){
         let viceite = new Aceite(jsonobject);
         div.innerHTML='<h1>'+jsonobject.nombre+'</h1><img src="../Reto 53/aceite.jpg"><h3>'+jsonobject.capacidad+'L '+jsonobject.precio+'€</h3><h4>Ref:'+jsonobject.referencia+'</h4>';
@@ -104,4 +115,16 @@ window.onload = function(){
 
         }
     })
+
+    tipo.addEventListener("change", function(){
+        if(tipo.value == "vino"){
+            uvas.style.visibility="visible";
+            uvaslabel.style.visibility="visible";
+        } else {
+            uvas.style.visibility="hidden";
+            uvaslabel.style.visibility="hidden";
+        }
+    })
+
+
 }
