@@ -46,8 +46,12 @@ window.onload = function(){
         iniciar.innerHTML = "Iniciar";
         permitirIntervalo = true;
     }) 
-
     
+    function iniciarContador(){
+        contador++;
+        parrafo.innerHTML = contador;
+    }
+
     function crearCookie(){
         let resultado = confirm("¿Quieres que creemos una cookie?");
         if (resultado){
@@ -75,11 +79,6 @@ window.onload = function(){
         document.cookie="crono=Mari;expires=Sat, 01 Jan 2000 00:00:01 GMT";
         console.log(document.cookie);
         alert("Cookie eliminada");
-    }
-
-    function iniciarContador(){
-        contador++;
-        parrafo.innerHTML = contador;
     }
 }
 

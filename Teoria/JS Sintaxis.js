@@ -620,35 +620,90 @@ document.write("Soy un print en navegador!");
     
 //EVENTOS
 
-function alerta(){
-    alert("Has hecho click");
-}
-window.onload = function(){  //Cuando se cargen todos los elementos del DOM, entonces ejecuta la funcion
-    document.addEventListener("click", alerta) //con document, seria al hacer el click en todo el documento
-}
+    function alerta(){
+        alert("Has hecho click");
+    }
+    window.onload = function(){  //Cuando se cargen todos los elementos del DOM, entonces ejecuta la funcion
+        document.addEventListener("click", alerta) //con document, seria al hacer el click en todo el documento
+    }
 
-let titulo = document.getElementById("titulo");
-window.onload = function(){ 
-    titulo.addEventListener("mouseover", alerta) //con titulo, seria pasar por encima solo del titulo
-}
+    let titulo = document.getElementById("titulo");
+    window.onload = function(){ 
+        titulo.addEventListener("mouseover", alerta) //con titulo, seria pasar por encima solo del titulo
+    }
 
-let parrafoVacio = document.getElementById("parrafoVacio");
-window.onload = function(){ 
-    document.addEventListener("mouseover", function(event){ //Conforme nos movemos por la pantalla, aparecen las coordenada en el parrafo vacio
-        parrafoVacio.textContent = `Coordenada: (${event.clientX},${event.clientY})`; //Para poder obtener las coordenadas, usamos el objeto "event"
-    }) 
-}
+    let parrafoVacio = document.getElementById("parrafoVacio");
+    window.onload = function(){ 
+        document.addEventListener("mouseover", function(event){ //Conforme nos movemos por la pantalla, aparecen las coordenada en el parrafo vacio
+            parrafoVacio.textContent = `Coordenada: (${event.clientX},${event.clientY})`; //Para poder obtener las coordenadas, usamos el objeto "event"
+        }) 
+    }
 
 //JSON
 
-const musico1={
-    nombre:"Bob",
-    apellido:"Dylan",
-    fecha_nacimiento: {dia:24,mes:5,año:1941},
-    discos:['Highway 61 Revisited’,’Blonde on Blonde','Self Portrait']
-}
+    const musico1={
+        nombre:"Bob",
+        apellido:"Dylan",
+        fecha_nacimiento: {dia:24,mes:5,año:1941},
+        discos:['Highway 61 Revisited’,’Blonde on Blonde','Self Portrait']
+    }
 
-console.log(JSON.stringify(musico1)); //Convierte un objeto en un JSON
+    console.log(JSON.stringify(musico1)); //Convierte un objeto en un JSON
 
-const jsonString = '{"nombre": "Juan", "edad": 30}';
-console.log(JSON.parse(jsonString)); //Convierte un JSON en objeto
+    const jsonString = '{"nombre": "Juan", "edad": 30}';
+    console.log(JSON.parse(jsonString)); //Convierte un JSON en objeto
+
+//PROMESAS
+
+    //Para cuando un return tarda en darnos el resultado. Se utilizan promesas para saber el estado del return (pendiente,aceptado o rechazado)
+    function temporizador(tiempo){
+        var promesa=new Promise((resolver, rechazar)=>{
+        var temp=setTimeout(()=>{
+              clearTimeout(temp2);
+              resolver("Tiempo concluido"); //Si la promesa se cumple
+              },tiempo);
+        var temp2=setTimeout(()=>{
+                  rechazar("El tiempo no va bien"); //Si la promesa no se cumple
+                  },tiempo*2);
+        });
+        return promesa;
+    }
+
+    //Para obtener el resultado de la promesa
+    temporizador(1000).then((texto)=>{
+        document.body.innerHTML="<p>"+texto+"</p>";
+        }).catch((mensaje)=>{
+        document.body.textContent=mensaje;
+    });
+
+//FUNCIONES ASYNC
+
+    //Uso similar a las promesas
+    async function cuenta(numero,elemento=document.body,tiempo=1000,f){ //Si no pone async no se puede usar await.
+        try{
+            for(let i=numero;i>=0;i--){
+                  await temporizador(tiempo); //Ejecuta temporizador y hasta que no acaba no continua. Por eso es asincrono
+                  elemento.textContent=i;
+            }
+            if(f){
+                f();
+            }
+        } catch(error){
+            console.log("Error: "+error);
+        }
+    }
+    
+    window.onload=function() {
+        let p1=document.querySelector("p:first-of-type");
+        let p2=document.querySelector("p:last-of-type");
+        cuenta(6,p1);
+        cuenta(60,p2,100,()=>{
+            p2.textContent="Fin";
+        });
+    }
+
+//API
+
+    fetch("url") //Usamos fetch para hacer una consulta a la API. Aqui tenemos que introducir la url que nos da la api.Esto nos devuelve una respuesta con todos los valores http
+    .then((res) => res.json()) // Convierte automáticamente el cuerpo de la respuesta a un json
+    .then((data) => {console.log(data);}); // Aquí se usa el JSON ya convertido a un objeto
