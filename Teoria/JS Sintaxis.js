@@ -704,6 +704,68 @@ document.write("Soy un print en navegador!");
 
 //API
 
-    fetch("url") //Usamos fetch para hacer una consulta a la API. Aqui tenemos que introducir la url que nos da la api.Esto nos devuelve una respuesta con todos los valores http
-    .then((res) => res.json()) // Convierte automáticamente el cuerpo de la respuesta a un json
-    .then((data) => {console.log(data);}); // Aquí se usa el JSON ya convertido a un objeto
+    //FETCH
+        //GET
+        //Con el metodo GET podemos concatenar en la url datos que nos interesen. 
+        fetch("url") //Usamos fetch para hacer una consulta a la API. Aqui tenemos que introducir la url que nos da la api.Esto nos devuelve una promesa.
+            .then(res => res.json()) // .json() convierte automáticamente el cuerpo de la respuesta a un objeto json. .text() convierte el json a texto 
+            .then(json => {
+                for(let element of json.data){
+                    document.write(element.id+" "+element.name);
+                }
+            })  // Si la funcion anterior es exitosa como en las promesas se ejecuta esta. Aquí se usa el JSON ya convertido a un objeto
+            .catch(error => console.log(error));
+
+        //POST
+        //Con el metodo POST debemos meter en un objeto los datos que queramos enviar a la url
+        let datos = {
+            name : 'Mari',
+            job : 'Developer'
+        }
+        datosJSON = JSON.stringify(datos);
+        fetch("url", {
+            method:'POST',
+            body: datosJSON,
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        }) 
+            .then(res => res.json()) 
+            .then(json => {
+                for(let element of json.data){
+                    document.write(element.id+" "+element.name);
+                }
+            })
+            .catch(error => console.log(error));
+
+    //JQUERY
+        //GET
+        $.ajax({
+            type:"GET",
+            url: "url",
+            data: "data",
+            dataType: "JSON",
+            success: datosjson => {
+                for(let element of datosjson.data){
+                    document.write(element.id+" "+element.name);
+                }
+            }
+        })
+
+        //POST
+        let datos1 = {
+            name : 'Mari',
+            job : 'Developer'
+        }
+
+        $.ajax({
+            type:"POST",
+            url: "url",
+            data: "datos1", //Aqui metemos el objeto para la url
+            dataType: "JSON",
+            success: datosjson => {
+                for(let element of datosjson.data){
+                    document.write(element.id+" "+element.name);
+                }
+            }
+        })
