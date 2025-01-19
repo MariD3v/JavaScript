@@ -739,18 +739,21 @@ document.write("Soy un print en navegador!");
             .catch(error => console.log(error));
 
     //JQUERY
+        //Para poder usar jquery, debemos añadir en el html la librería de jquery <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> despues del script de nuestro reto
         //GET
-        $.ajax({
-            type:"GET",
-            url: "url",
-            data: "data",
-            dataType: "JSON",
-            success: datosjson => {
-                for(let element of datosjson.data){
-                    document.write(element.id+" "+element.name);
+        $(document).ready(function() {
+            $.ajax({
+                type:"GET",
+                url: "url",
+                data: "data",
+                dataType: "JSON",
+                success: datosjson => {
+                    for(let element of datosjson.data){
+                        document.write(element.id+" "+element.name);
+                    }
                 }
-            }
-        })
+            })
+        });
 
         //POST
         let datos1 = {
@@ -758,14 +761,17 @@ document.write("Soy un print en navegador!");
             job : 'Developer'
         }
 
-        $.ajax({
-            type:"POST",
-            url: "url",
-            data: "datos1", //Aqui metemos el objeto para la url
-            dataType: "JSON",
-            success: datosjson => {
-                for(let element of datosjson.data){
-                    document.write(element.id+" "+element.name);
+        $(document).ready(function() {
+            $.ajax({
+                type:"POST",
+                url: "url",
+                data: "datos1", //Aqui metemos el objeto para la url
+                dataType: "JSON",
+                success: datosjson => {
+                    for(let element of datosjson.data){
+                        document.write(element.id+" "+element.name);
+                    }
                 }
-            }
-        })
+            })
+        });
+        

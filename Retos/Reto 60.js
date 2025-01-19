@@ -13,3 +13,21 @@ nombre
 email
 direccion
 */
+
+$(document).ready(function () {
+    $.ajax({
+        type: "GET",
+        url: 'https://randomuser.me/api/',
+        dataType: 'json',
+        success: datosjson => {
+            const user = datosjson.results[0];
+            document.write("<img src='" + user.picture.large + "'><br>");
+            document.write("Nombre:" + user.name.first+" "+user.name.last+"<br>");
+            document.write("Email:" + user.email+"<br>");
+            document.write("Direccion:" + user.location.street.name+" "+user.location.street.number+" "+user.location.state+" "+user.location.country+"<br>");
+
+        }
+    });
+});
+
+$.ajax();

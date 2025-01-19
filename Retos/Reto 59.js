@@ -12,7 +12,14 @@ async function obtenerDatos(){
     await fetch('https://swapi.dev/api/films/'+document.getElementById("numero").value)
     .then(res => res.json()) 
     .then(pelicula => {
-            document.write("Episodio: "+pelicula.episode_id+", Titulo: "+pelicula.title+", Director: "+pelicula.director+", Fecha: "+pelicula.release_date+"<br>");
+            document.write("Episodio: "+pelicula.episode_id+", Titulo: "+pelicula.title+", Director: "+pelicula.director+", Fecha: "+pelicula.release_date+"<br>Personajes:<br>");
+            for (let i = 1; i <= pelicula.characters.length; i++) {
+                fetch(pelicula.characters[i])
+                .then(res => res.json()) 
+                .then(personaje => {
+                    document.write("Personaje "+(i)+": "+personaje.name+"<br>");
+                }) 
+            } 
     })  
     .catch(error => console.log(error));
 } 
