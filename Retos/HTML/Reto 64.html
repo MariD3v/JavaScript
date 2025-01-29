@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reto 61</title>
+    <style>
+        *{
+            font-family: sans-serif;
+        }
+
+        main{
+            text-align: center;
+        }
+        main div div{
+            display: inline-block;
+            padding: 3em;
+        }
+
+        main div div:nth-of-type(odd){
+            background-color: lightgray;
+        }
+        main div div:hover{
+            background-color:rgb(88, 230, 230);
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <input type="text" id="valor"/>
+        <input type="button" value="Buscar por AJAX" onclick="obtenerBuscadoAJAX()"/>
+        <input type="button" value="Buscar por XMLRequest" onclick="obtenerBuscadoXML()"/>
+        <div id="divBuscado">
+
+        </div>
+        <div id="divTrending">
+            <h1>Gifs en tendencia:</h1>
+        </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../Reto 64.js"></script>
+</body>
+</html>

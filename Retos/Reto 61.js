@@ -15,15 +15,11 @@ Introduce en un campo un texto sobre un tema a buscar y un boton y obtén los gi
 
 function obtenerTrending(){
     let div = document.getElementById("divTrending");
-    $.ajax({
-        type:"GET",
-        url: "https://api.giphy.com/v1/gifs/trending",
-        data: {'api_key':'fAJWRf6y2IJdG2ZrcUb91bDbiUijRueB'},
-        dataType: "JSON",
-        success: datosjson => {
-            for(let element of datosjson.data){
-                div.innerHTML+= ("<div><img src=\""+element.images.fixed_height.url+"\"/></div>");
-            }
+    fetch("https://api.giphy.com/v1/gifs/trending?api_key=fAJWRf6y2IJdG2ZrcUb91bDbiUijRueB")
+    .then(res => res.json())
+    .then(json => {
+        for(let element of json.data){
+            div.innerHTML+= ("<div><img src=\""+element.images.fixed_height.url+"\"/></div>");
         }
     })
 }
@@ -34,15 +30,11 @@ function obtenerBuscado(){
     let div = document.getElementById("divBuscado");
     div.innerHTML = "";
     let input = document.getElementById("valor").value;
-    $.ajax({
-        type:"GET",
-        url: "https://api.giphy.com/v1/gifs/search",
-        data: {'api_key':'fAJWRf6y2IJdG2ZrcUb91bDbiUijRueB','q':input},
-        dataType: "JSON",
-        success: datosjson => {
-            for(let element of datosjson.data){
-                div.innerHTML+= ("<div><img src=\""+element.images.fixed_height.url+"\"/></div>");
-            }
+    fetch("https://api.giphy.com/v1/gifs/search?api_key=fAJWRf6y2IJdG2ZrcUb91bDbiUijRueB&q="+input)
+    .then(res => res.json())
+    .then(json => {
+        for(let element of json.data){
+            div.innerHTML+= ("<div><img src=\""+element.images.fixed_height.url+"\"/></div>");
         }
     })
 }

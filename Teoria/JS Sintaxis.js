@@ -763,7 +763,7 @@ document.write("Soy un print en navegador!");
         $.ajax({
             type:"POST",
             url: "url",
-            data: "datos1", //Aqui metemos el objeto para la url
+            data: datos1, //Aqui metemos el objeto para la url
             dataType: "JSON",
             success: datosjson => {
                 for(let element of datosjson.data){
@@ -771,4 +771,31 @@ document.write("Soy un print en navegador!");
                 }
             }
         })
-        
+    
+    //XMLHttpRequest
+
+        //URL
+        let xhr = new XMLHttpRequest();
+        let key = "Mari1234"
+        xhr.open('GET', 'https://api.ejemplo.com/data?api_key='+key, true); //Abrimos la petición, asi pasamos parametros a la url
+        xhr.send(); //La enviamos
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                let responseText = xhr.responseText;
+                console.log(responseText); // Manejas la respuesta como texto
+                let jsonData = JSON.parse(responseText); // Convierte el texto a objeto JSON
+                console.log(jsonData);
+            }
+        }
+
+        //PHP
+        function enviarPeticion(str) {
+            var xmlhttp = new XMLHttpRequest(); //Creamos una peticion
+            xmlhttp.onreadystatechange = function() { //Preparamos la peticion
+                if (this.readyState == 4 && this.status == 200) { //Si la peticion es correcta
+                    document.getElementById("span").innerHTML = this.responseText; //this.responseText es la respuesta de php
+                }
+            };
+            xmlhttp.open("GET", "archivoPHP.php?x=" + str, true); //Abrimos la peticion, pasamos el parámetro x a php
+            xmlhttp.send(); //Enviamos la peticion
+        }
