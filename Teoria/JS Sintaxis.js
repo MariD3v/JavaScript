@@ -799,3 +799,35 @@ document.write("Soy un print en navegador!");
             xmlhttp.open("GET", "archivoPHP.php?x=" + str, true); //Abrimos la peticion, pasamos el parámetro x a php
             xmlhttp.send(); //Enviamos la peticion
         }
+
+//LOCALSTORAGE
+
+    localStorage.setItem("Nombre","Mari") //Guardar datos en la maquina del usuario
+    localStorage.getItem("Nombre") //Obtener datos
+    localStorage.removeItem("Nombre") //Borrar datos
+    localStorage.clear() //Borra todos los datos
+
+//GEOLOCATION
+    
+    //GetCurrentPosition  //Mira la posición 1 vez
+    navigator.geolocation.getCurrentPosition( 
+    pos=>{
+        console.log("Latitud: "+ pos.coords.latitude + ", Longitud: "+pos.coords.longitude)
+    },
+    error=>{
+        console.log("Error: "+error)
+    })
+
+    //WatchPosition  //Mira la posición constantemente
+    var cont = 0;
+    let position = navigator.geolocation.watchPosition(    
+    pos=>{
+        cont++;
+        console.log("Latitud: "+ pos.coords.latitude + ", Longitud: "+pos.coords.longitude)
+        if(cont==3){
+            navigator.geolocation.clearWatch(position)
+        }
+    },
+    error=>{
+        console.log("Error: "+error)
+    })
