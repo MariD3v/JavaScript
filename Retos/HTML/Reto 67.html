@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reto 67</title>
+</head>
+<body>
+    <main>
+        <p>Nº de visitas:<span id="visitas">0</span></p>
+        <p id="parrafo" style="display: none;">Este parrafo está en tu color favorito</p>
+        <form>
+            <label>Color favorito:</label>
+            <select id="color" required>
+                <option value="green">Verde
+                <option value="red">Rojo
+                <option value="blue">Azul
+            </select>
+            <input type="button" value="enviar" onclick="ponerPreferencia()">
+        </form>
+        <input id="quitar" style="display: none;" type="button" value="Borrar preferencia" onclick="quitarPreferencia()">
+    </main>
+    <script src="../Reto 67.js"></script>
+</body>
+</html>

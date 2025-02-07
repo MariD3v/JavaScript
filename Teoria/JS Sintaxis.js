@@ -253,7 +253,18 @@ document.write("Soy un print en navegador!");
     }
 
     callback(12,doble); //Función que llama dentro a otra función
-    
+
+//MODULOS
+
+    export{ //Asi se exportan variables y funciones
+        PI,
+        doble
+    } 
+
+    //A los archivos que importan tenemos que poner <script type="module">
+    import{PI,doble as multix2} from "./Teoria Clase/archivo.js" //Asi se importan variables y funciones
+    import * as datos from "./Teoria Clase/archivo.js" //Asi obtenemos todas las variables y funciones exportadas
+    var PI = datos.PI;
 
 //CLASES
     //Objetos literales
@@ -451,7 +462,7 @@ document.write("Soy un print en navegador!");
     document.write(resultado[0]); // Devuelve el resultado
     document.write(resultado[1]); // Devuelve la posición del resultado en el texto
 
-    //BOM (Browser Objects Model)
+//BOM (Browser Objects Model)
     
     //window
     let desplazamientoHorizontal = window.scrollX;
