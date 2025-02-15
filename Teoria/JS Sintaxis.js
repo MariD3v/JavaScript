@@ -842,3 +842,23 @@ document.write("Soy un print en navegador!");
     error=>{
         console.log("Error: "+error)
     })
+
+//NOTIFICACIONES
+
+    let permiso= Notification.permission;
+    if(permiso=="default"){
+        Notification.requestPermission()
+        .then(resp=>{
+            if(resp==="granted"){
+                let n = new Notification('Permiso concedido',{body:"Bienvenido/a a esta <strong>web</strong>",icon:"webLogo.png"})
+                n.addEventListener("click",(ev)=>{ window.open("https://aulavirtual.murciaeduca.es")}) //Añadir evento a las notificaciones
+                setTimeout(()=>n.close(),2000) //Si queremos que se cierre automaticamente la notificacion
+            } else {
+                new Notification('Permiso denegado')
+            }        
+        })
+    } else if (permiso=="granted"){
+        let n = new Notification('Permiso concedido',{body:"Bienvenido/a a esta <strong>web</strong>",icon:"webLogo.png"})
+        n.addEventListener("click",(ev)=>{ window.open("https://aulavirtual.murciaeduca.es")}) //Añadir evento a las notificaciones
+        setTimeout(()=>n.close(),2000) //Si queremos que se cierre automaticamente la notificacion
+    }

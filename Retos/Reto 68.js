@@ -12,54 +12,55 @@ Crear una pequeña aplicación web con los siguientes requisitos:
 */
 
 var div = document.getElementById("div");
+var historial = document.getElementById("historial");
+var seguimientoID = null; 
+var intervaloID = null;    
+var ultimaPosicion = null; 
 
-function ubicacion(){
-    navigator.geolocation.getCurrentPosition( 
-        pos=>{
-            var latitude = pos.coords.latitude;
-            var longitude = pos.coords.longitude;
-            var altitude = pos.coords.altitude;
-            var accuracy =+pos.coords.accuracy;
-            div.innerHTML = ("Coordenadas: "+ latitude + ", "+longitude+"<br>Altitud: "+altitude+"<br>Precisión: "+accuracy+"<br>Enlace: ");
-            div.innerHTML +=("<a href=\"https://www.openstreetmap.org/?minlon="+longitude+"&minlat="+latitude+"&maxlon="+longitude+"&maxlat="+latitude+"&mlat="+latitude+"&mlon="+longitude+"\">Ver mapa</a>")
-        },
-        error=>{
-            div.innerHTML = ("Error: "+error)
-        })
+function ubicacion() {
+    navigator.geolocation.getCurrentPosition(
+        pos => {
+            actualizarInfo(pos);
+        }
+    );
 }
 
-let cont = 0;
-let position = navigator.geolocation.watchPosition(    
-    pos=>{
-        cont++;
-        let lat = pos.coords.latitude;
-        let lon = pos.coords.longitude;
-        let alt = pos.coords.altitude !== null ? pos.coords.altitude : "No disponible";
-        let precision = pos.coords.accuracy;
-        let fechaHora = new Date().toLocaleString();
-        let info = `${fechaHora}<br>Coordenadas: ${lat}, ${lon}<br>Altitud: ${alt}<br>Precisión: ${precision} metros<br><a href="https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}" target="_blank">Ver en mapa</a>`; 
+function seguir() {
+    if (seguimientoID !== null) {
+        alert("El seguimiento ya está en curso.");
+        return;
     }
-)
-cont ++;
-if (cont>=1000){
-    navigator.geolocation.clearWatch(position)
+    seguimientoID = navigator.geolocation.watchPosition(
+        pos => {
+            ultimaPosicion = pos;
+        }
+    );
+    intervaloID = setInterval(() => {
+        if (ultimaPosicion) {
+            actualizarInfo(ultimaPosicion);
+        }
+    }, 10000);
 }
 
-function seguir(){
-    var cont=0;
+function actualizarInfo(pos) {
+    let lat = pos.coords.latitude;
+    let lon = pos.coords.longitude;
+    let alt = pos.coords.altitude !== null ? pos.coords.altitude : "No disponible";
+    let precision = pos.coords.accuracy;
+    let fechaHora = new Date().toLocaleString();
 
-    var cadaCiertoTiempo = setInterval(function(){        
-        div.innerHTML = info;
-        let li = document.createElement("li");
-        let historial = document.getElementById("historial");
-        li.innerHTML = info;
-        historial.appendChild(li);
+    let info = `
+        <b>${fechaHora}</b><br>
+        Coordenadas: ${lat}, ${lon} <br>
+        Altitud: ${alt} <br>
+        Precisión: ${precision} metros <br>
+        <a href="https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}" target="_blank">Ver en mapa</a>
+    `;
 
-        cont ++;
-        if (cont>=1000){
-            clearInterval(cadaCiertoTiempo) 
-        } 
-    }, 10000)
+    div.innerHTML = info;
+    let li = document.createElement("li");
+    li.innerHTML = info;
+    historial.appendChild(li);
 }
 
 
