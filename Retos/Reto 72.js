@@ -1,91 +1,69 @@
-/*Jugar a los dados, de 3 maneras distintas */
+/* Jugar a los dados, de 3 maneras distintas */
+
+const MAX_DICE_VALUE = 6;
 
 function lanzarDado(jugador) {
   return new Promise((resolve) => {
     setTimeout(() => {
-      const resultado = Math.floor(Math.random() * 6) + 1;
+      const resultado = Math.floor(Math.random() * MAX_DICE_VALUE) + 1;
       resolve({ jugador, resultado });
     }, 1000);
   });
 }
 
-// VERSION CON PROMESAS ANIDADAS
-function jugar() {
+// Jugar con Promesas Anidadas
+function jugarConPromesasAnidadas() {
   console.log("Los Jugadores pueden lanzar los dados...");
 
   lanzarDado("Jugador 1")
     .then(resultado1 => {
       console.log(`${resultado1.jugador} sale ${resultado1.resultado}`);
-
-      lanzarDado("Jugador 2")
+      return lanzarDado("Jugador 2")
         .then(resultado2 => {
           console.log(`${resultado2.jugador} sale ${resultado2.resultado}`);
-
-          if (resultado1.resultado < resultado2.resultado) {
-            console.log(`${resultado1.jugador} vencedor!`);
-          } else if (resultado1.resultado > resultado2.resultado) {
-            console.log(`${resultado2.jugador} vencedor!`);
-          } else {
-            console.log("¡Han empatado!");
-          }
-        })
-        .catch(error => {
-          console.error("Error en el lanzamiento del dado del Jugador 2:", error);
+          determinarVencedor(resultado1, resultado2);
         });
     })
-    .catch(error => {
-      console.error("Error en el lanzamiento del dado del Jugador 1:", error);
-    });
+    .catch(error => console.error("Error en el lanzamiento del dado:", error));
 }
 
-
-// VERSION CON Promise.all()
-function jugar() {
+// Jugar con Promise.all()
+function jugarConPromiseAll() {
   console.log("Los Jugadores pueden lanzar los dados...");
 
-  const jugador1 = lanzarDado("Jugador 1");
-  const jugador2 = lanzarDado("Jugador 2");
-
-  Promise.all([jugador1, jugador2])
-
-    .then(resultados => {
-      const [resultado1, resultado2] = resultados;
+  Promise.all([lanzarDado("Jugador 1"), lanzarDado("Jugador 2")])
+    .then(([resultado1, resultado2]) => {
       console.log(`${resultado1.jugador} sale ${resultado1.resultado}`);
       console.log(`${resultado2.jugador} sale ${resultado2.resultado}`);
-
-      if (resultado1.resultado < resultado2.resultado) {
-        console.log(`${resultado1.jugador} vencedor!`);
-      } else if (resultado1.resultado > resultado2.resultado) {
-        console.log(`${resultado2.jugador} vencedor!`);
-      } else {
-        console.log("¡Han empatado!");
-      }
+      determinarVencedor(resultado1, resultado2);
     })
-    .catch(error => {
-      console.error("Error en el lanzamiento de los dados:", error);
-    });
+    .catch(error => console.error("Error en el lanzamiento de los dados:", error));
 }
-// VERSION CON FUNCION ASYNC   
-  async function jugar() {
-    try{
+
+// Jugar con async/await
+async function jugarConAsyncAwait() {
+  try {
     console.log("Los Jugadores pueden lanzar los dados...");
-    let resultado1 = await lanzarDado("Jugador 1");
+    const resultado1 = await lanzarDado("Jugador 1");
     console.log(`${resultado1.jugador} sale ${resultado1.resultado}`);
-    let resultado2 = await lanzarDado("Jugador 2");
+    const resultado2 = await lanzarDado("Jugador 2");
     console.log(`${resultado2.jugador} sale ${resultado2.resultado}`);
-    
-    if (resultado1.resultado < resultado2.resultado) {
-        console.log(`${resultado1.jugador} vencedor!`);
-      } else if (resultado1.resultado > resultado2.resultado) {
-        console.log(`${resultado2.jugador} vencedor!`);
-      } else {
-        console.log("¡Han empatado!");
-      }
-    }catch(error){
-        console.error("Error en el lanzamiento del dado", error);
-
-    }
+    determinarVencedor(resultado1, resultado2);
+  } catch (error) {
+    console.error("Error en el lanzamiento del dado:", error);
+  }
 }
 
-// Ejecutar el juego
-jugar();
+// Determinar el vencedor
+function determinarVencedor(resultado1, resultado2) {
+  if (resultado1.resultado < resultado2.resultado) {
+    console.log(`${resultado2.jugador} vencedor!`);
+  } else if (resultado1.resultado > resultado2.resultado) {
+    console.log(`${resultado1.jugador} vencedor!`);
+  } else {
+    console.log("¡Han empatado!");
+  }
+}
+
+// Ejecutar el juego con una de las versiones
+jugarConAsyncAwait();
